@@ -8,11 +8,11 @@ while (true) {
 1. Ajouter un nouveau candidat 
 2. Ajouter plusieurs candidats à la fois.
 3. Afficher la liste des candidats
-4.  Voter pour un candidat
+4. Voter pour un candidat
 5. Modifier les informations d'un candidat 
 6. Supprimer un candidat 
-7.  Rechercher des candidats
-8.  Statistiques de l'élection
+7. Rechercher des candidats
+8. Statistiques de l'élection
 0. Quitter`)
     console.log(`=================================
 thank you for your attention
@@ -103,16 +103,38 @@ function AFlist() {
     let afficher = prompt("you have 3 choose 'simple' and 'plus' or 'parti politique' type your choose: ")
     switch (afficher) {
         case "simple":
-            console.log()
-            for (let j = 1; j < candidats.length; j++) {
-                console.log(`condida: ${j} => ${candidats[j].cin} => ${candidats[j].nom} => ${candidats[j].prenom} => ${candidats[j].partiPolitique} => ${candidats[j].age} => ${candidats[j].electeurs}`)
+            for (let j = 0; j < candidats.length; j++) {
+                console.log(`condida: ${j + 1} => ${candidats[j].cin} => ${candidats[j].nom} => ${candidats[j].prenom} => ${candidats[j].partiPolitique} => ${candidats[j].age} => ${[candidats[j].electeurs]}: ${candidats[j].electeurs.length}`)
             }
             break;
-        // case "plus":
-
+        case "plus":
+            for (let h = 0; h < candidats.length; h++) {
+                for (let i = 0; i < candidats.length; i++) {
+                    let compari;
+                    for (let j = i + 1; j < candidats.length; j++) {
+                        if (candidats[i].electeurs < candidats[j].electeurs) {
+                            compari = candidats[i].electeurs;
+                            candidats[i].electeurs = candidats[j].electeurs;
+                            candidats[j].electeurs = compari;
+                        }
+                    }
+                }
+                console.log(`condida: ${h + 1} => ${candidats[h].cin} => ${candidats[h].nom} => ${candidats[h].prenom} => ${candidats[h].partiPolitique} => ${candidats[h].age} => ${[candidats[h].electeurs]}: ${candidats[h].electeurs.length}`)
+            }
+            break
+        case "parti politique":
+            let politique = prompt("type your parti politique");
+            for (let i = 0; i < candidats.length; i++) {
+                let w = candidats
+                switch (politique) {
+                    case 
+            }
+            }
     }
-
 }
+
+
+
 function Votes() {
     let vote = prompt("do you want vote : ");
     switch (vote) {
@@ -120,13 +142,18 @@ function Votes() {
             let pr = prompt("enter your cin : ");
             let x = prompt("enter cin Related to the candidate: ");
             let i = 0;
+            if (candidats[i].electeurs === pr) {
+                console.log("the cin deja vue");
+            }
             while (i < candidats.length) {
-                let R = candidats[i].electeurs;
+                let c = [];
                 if (x === candidats[i].cin) {
-                    candidats[i].electeurs += pr;
-                    console.log(candidats[i].electeurs);
+                    c += pr;
+                    candidats[i].electeurs.push(c);
                 }
                 i++;
             }
+        default:
+            break;
     }
 }
