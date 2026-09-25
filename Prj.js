@@ -2,7 +2,7 @@ var prompt = require('prompt-sync')();
 const candidats = require('./PrjSasData');
 while (true) {
     console.log(`           =================================
-                     RAILWAY MANAGER
+                     Listes Électorales
             =================================`);
     console.log(`
                  1. Ajouter un nouveau candidat 
@@ -50,23 +50,8 @@ while (true) {
     }
 }
 function AJnveau() {
-    const condida = [];
-    let c = prompt("do you want add a condida: ");
-    switch (c) {
-        case "yes":
-            let cin = prompt("type cin condida : ");
-            let name = prompt("type nom condida : ");
-            let prenom = prompt("type prenom condida : ");
-            let partiPolitique = prompt("type partiPolitique condida : ");
-            let age = Number(prompt("type age condida : "));
-            let electeurs = [];
-            condida.push({ cin, name, prenom, partiPolitique, age, electeurs })
-            console.log(condida);
-            break;
-        default:
-            console.log("quitter");
-    }
-}
-Function AJplusr(){
 
+
+    console.log("quitter");
 }
+
