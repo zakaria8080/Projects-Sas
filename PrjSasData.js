@@ -48,15 +48,15 @@ console.log(
 const candidats = [
     { cin: "UI78765", nom: "commando", prenom: "ali", partiPolitique: "pomme", age: 21, electeurs: [] },
     { cin: "ZI78798", nom: "Mansouri", prenom: "Fatima", partiPolitique: "banane", age: 54, electeurs: [] },
-    { cin: "LI8755", nom: "Amrani", prenom: "Youssef", partiPolitique: "Indépendant", age: 52, electeurs: [] },
+    { cin: "LI8755", nom: "Amrani", prenom: "Youssef", partiPolitique: "Independant", age: 52, electeurs: [] },
     { cin: "SU57644", nom: "Bennis", prenom: "Leila", partiPolitique: "youcode", age: 61, electeurs: [] },
     { cin: "QZ346767", nom: "Alaoui", prenom: "Mehdi", partiPolitique: "laiko", age: 66, electeurs: [] },
-    { cin: "9076543", nom: "Chraibi", prenom: "Hicham", partiPolitique: "Indépendant", age: 38, electeurs: [] },
+    { cin: "9076543", nom: "Chraibi", prenom: "Hicham", partiPolitique: "Independant", age: 38, electeurs: [] },
     { cin: "2345689", nom: "Tazi", prenom: "Sara", partiPolitique: "pomme", age: 29, electeurs: [] },
     { cin: "234567U9", nom: "Benali", prenom: "Omar", partiPolitique: "ocp", age: 31, electeurs: [] },
     { cin: "CY456789", nom: "Zniber", prenom: "Tarik", partiPolitique: "ocp", age: 59, electeurs: [] },
     { cin: "AP345678", nom: "ahLou", prenom: "Meryem", partiPolitique: "lasamir", age: 42, electeurs: [] },
-    { cin: "AZ345678", nom: "Bennani", prenom: "Rachid", partiPolitique: "Indépendant", age: 39, electeurs: [] },
+    { cin: "AZ345678", nom: "Bennani", prenom: "Rachid", partiPolitique: "Independant", age: 39, electeurs: [] },
 ];
 
 module.exports = candidats;
