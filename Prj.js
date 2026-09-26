@@ -40,7 +40,7 @@ thank you for your attention
                 MOinfo();
                 break;
             case "6":
-                // ModInfo();
+                supprimi();
                 break;
             case "7":
                 // REchecondid();
@@ -52,15 +52,15 @@ thank you for your attention
     }
 }
 menu();
+
 function AJnveau() {
     let cins = prompt("type a cin : ")
     for (let c = 0; c < candidats.length; c++) {
         if (cins === candidats[c].cin) {
             console.log("le cin deja ajouter!!")
-            return menu();
+            return;
         }
     }
-    let electeurs = [];
     let noms = prompt("type a nom : ")
     let prenoms = prompt("type a prenom : ")
     let partiPolitiques = prompt("type a partiPolitique : ")
@@ -74,10 +74,12 @@ function AJnveau() {
         prenom: prenoms,
         partiPolitique: partiPolitiques,
         age: ages,
-        electeur: electeurs
+        electeurs: []
     }
     candidats.push(obj)
+    console.log("Candidat ajouté avec succès !");
 }
+
 function AJplusr() {
     let x = parseInt(prompt("type number of add in candida: "));
     for (let i = 1; i <= x; i++) {
@@ -87,6 +89,7 @@ function AJplusr() {
         AJnveau();
     }
 }
+
 function AFlist() {
     console.log(`=================================
             AFlist
@@ -123,22 +126,23 @@ function AFlist() {
     }
 }
 
-
-
 function Votes() {
+    let cins = prompt("type a cin : ")
+    for (let c = 0; c < candidats.length; c++) {
+        if (cins === candidats[c].cin) {
+            console.log("le cin deja ajouter!!")
+            return;
+        }
+    }
     let vote = prompt("do you want vote : ");
     switch (vote) {
         case "yes":
-            let pr = prompt("enter your cin : ");
             let x = prompt("enter cin Related to the candidate: ");
             let i = 0;
-            if (candidats[i].electeurs === pr) {
-                console.log("the cin deja vue");
-            }
             while (i < candidats.length) {
                 let c = [];
                 if (x === candidats[i].cin) {
-                    c += pr;
+                    c += cins;
                     candidats[i].electeurs.push(c);
                 }
                 i++;
@@ -154,13 +158,35 @@ function MOinfo() {
             let choose = parseInt(prompt("type a choose 1 or 2: "));
             switch (choose) {
                 case 1:
-                    candidats[i].age = choose;
+                    let a = parseInt(prompt("modifier your age: "));
+                    candidats[i].age = a;
                     break;
                 case 2:
-                    candidats[i].partiPolitique = choose;
+                    let b = prompt("change your partiPolitique: ")
+                    candidats[i].partiPolitique = b;
                 default:
                     menu();
             }
         }
     }
+}
+function supprimi() {
+    let vote = prompt("do you want remove : ");
+    switch (vote) {
+        case "yes":
+            cins = prompt("enter cin for remove the candidate: ");
+            let i = 0;
+            while (i < candidats.length) {
+                if (cins === candidats[i].cin) {
+                    candidats.splice(i, 1);
+                    break;
+                }
+                i++;
+            }
+        default:
+            break;
+    }
+}
+function REchecondid() {
+
 }
