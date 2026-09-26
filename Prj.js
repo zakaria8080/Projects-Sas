@@ -50,6 +50,7 @@ while (true) {
 }
 
 function AJnveau() {
+    // let arr = [];
     let cins = prompt("type a cin : ")
     for (let c = 0; c < candidats.length; c++) {
         if (cins === candidats[c].cin) {
@@ -61,7 +62,7 @@ function AJnveau() {
     let prenoms = prompt("type a prenom : ")
     let partiPolitiques = prompt("type a partiPolitique : ")
     let ages = parseInt(prompt("type a age : "))
-    if (ages < 18 || ages < 80) {
+    if (ages < 18) {
         console.log("not have for partage!!");
         return;
     }
@@ -149,6 +150,8 @@ function Votes() {
                 }
                 i++;
             }
+            console.log("succes!!!")
+            break;
         default:
             break;
     }
@@ -162,6 +165,7 @@ function MOinfo() {
                 case 1:
                     let a = parseInt(prompt("modifier your age: "));
                     candidats[i].age = a;
+                    console.log("you ")
                     break;
                 case 2:
                     let b = prompt("change your partiPolitique: ")
@@ -178,24 +182,35 @@ function supprimi() {
         case "yes":
             cins = prompt("enter cin for remove the candidate: ");
             let i = 0;
-            while (i < candidats.length) {
-                if (cins === candidats[i].cin) {
+            while (i < saad.length) {
+                if (cins === saad[i].cin) {
                     candidats.splice(i, 1);
                     break;
                 }
                 i++;
             }
+            console.log("remove succes!!!");
         default:
+            console.log("unsucces");
             break;
     }
 }
 function REchecondid() {
     let name = prompt("type a name of condidat : ")
-    for (let i = 0; i < candidats.length; i++) {
-        if (name === candidats[i].nom) {
-            console.log(`condidat : ${i} => cin : ${candidats[i].cin} => ${candidats[i].nom} => ${candidats[i].prenom} => ${candidats[i].partiPolitique} => ${candidats[i].age} => vote: ${candidats[i].electeurs.length}`);
+    let cond;
+    let exist = false;
+    for (let i = 0; i < saad.length; i++) {
+        if (name === saad[i].nom) {
+            cond = saad[i];
+            exist = true
+            console.log("the recherche is succes!!");
             break;
         }
+    }
+    // console.log(cond)
+    console.log(`${cond.cin} => ${cond.nom} => ${cond.prenom} => ${cond.partiPolitique} => ${cond.age} => vote : ${cond.electeurs.length}`);
+    if (!exist) {
+        console.log("you have a problem!")
     }
 }
 function StatEXtion() {
