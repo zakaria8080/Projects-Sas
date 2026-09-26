@@ -1,57 +1,53 @@
 var prompt = require('prompt-sync')();
 const candidats = require('./PrjSasData');
-function menu() {
-    while (true) {
-        console.log(`=================================
- Listes Électorales
-=================================`);
-        console.log(`
-1. Ajouter un nouveau candidat 
+const saad = [...candidats];
+while (true) {
+    console.log(`========================================
+            Listes Électorales                                           
+========================================`); console.log(`
+1. Ajouter un nouveau candidat
 2. Ajouter plusieurs candidats à la fois.
 3. Afficher la liste des candidats
 4. Voter pour un candidat
-5. Modifier les informations d'un candidat 
-6. Supprimer un candidat 
+5. Modifier les informations d'un candidat
+6. Supprimer un candidat
 7. Rechercher des candidats
 8. Statistiques de l'élection
-0. Quitter`)
-        console.log(`=================================
-thank you for your attention
-=================================`);
-        let n = prompt("type a number :")
-        if (n == "0") {
-            console.log("quitter")
+0. Quitter
+`); console.log("========================================");
+
+    let n = prompt("type a number :")
+    if (n == "0") {
+        console.log("quitter")
+        break
+    }
+    switch (n) {
+        case "1":
+            AJnveau();
             break
-        }
-        switch (n) {
-            case "1":
-                AJnveau();
-                break
-            case "2":
-                AJplusr();
-                break;
-            case "3":
-                AFlist();
-                break;
-            case "4":
-                Votes();
-                break;
-            case "5":
-                MOinfo();
-                break;
-            case "6":
-                supprimi();
-                break;
-            case "7":
-                // REchecondid();
-                break;
-            case 8:
-                // StatEXtion();
-                break;
-        }
+        case "2":
+            AJplusr();
+            break;
+        case "3":
+            AFlist();
+            break;
+        case "4":
+            Votes();
+            break;
+        case "5":
+            MOinfo();
+            break;
+        case "6":
+            supprimi();
+            break;
+        case "7":
+            REchecondid();
+            break;
+        case "8":
+            StatEXtion();
+            break;
     }
 }
-menu();
 
 function AJnveau() {
     let cins = prompt("type a cin : ")
@@ -65,6 +61,10 @@ function AJnveau() {
     let prenoms = prompt("type a prenom : ")
     let partiPolitiques = prompt("type a partiPolitique : ")
     let ages = parseInt(prompt("type a age : "))
+    if (ages < 18 || ages < 80) {
+        console.log("not have for partage!!");
+        return;
+    }
     if (partiPolitiques === "" || partiPolitiques === null) {
         partiPolitiques = "Indépendant"
     }
@@ -94,35 +94,37 @@ function AFlist() {
     console.log(`=================================
             AFlist
 =================================`);
-    let afficher = prompt("you have 3 choose 'simple' and 'plus' or 'parti politique' type your choose: ")
+    let afficher = prompt("you have 3 choose '1' and '2' or '3' type your choose: ")
     switch (afficher) {
-        case "simple":
+        case "1":
             for (let j = 0; j < candidats.length; j++) {
                 console.log(`condida: ${j + 1} => ${candidats[j].cin} => ${candidats[j].nom} => ${candidats[j].prenom} => ${candidats[j].partiPolitique} => ${candidats[j].age} => ${[candidats[j].electeurs]}: ${candidats[j].electeurs.length}`)
             }
             break;
-        case "plus":
-            for (let h = 0; h < candidats.length; h++) {
-                for (let i = 0; i < candidats.length; i++) {
+        case "2":
+            for (let h = 0; h < saad.length; h++) {
+                for (let i = 0; i < saad.length; i++) {
                     let compari;
-                    for (let j = i + 1; j < candidats.length; j++) {
-                        if (candidats[i].electeurs < candidats[j].electeurs) {
-                            compari = candidats[i].electeurs;
-                            candidats[i].electeurs = candidats[j].electeurs;
-                            candidats[j].electeurs = compari;
+                    for (let j = i + 1; j < saad.length; j++) {
+                        if (saad[i].electeurs < saad[j].electeurs) {
+                            compari = saad[i];
+                            saad[i] = saad[j];
+                            saad[j] = compari;
                         }
                     }
                 }
-                console.log(`condida: ${h + 1} => ${candidats[h].cin} => ${candidats[h].nom} => ${candidats[h].prenom} => ${candidats[h].partiPolitique} => ${candidats[h].age} => ${[candidats[h].electeurs]}: ${candidats[h].electeurs.length}`)
+                console.log(`condida: ${h + 1} => ${saad[h].cin} => ${saad[h].nom} => ${saad[h].prenom} => ${saad[h].partiPolitique} => ${saad[h].age} => votes: ${saad[h].electeurs.length}`)
             }
             break
-        case "parti politique":
+        case "3":
             let politique = prompt("type your parti politique: ");
             for (let i = 0; i < candidats.length; i++) {
                 if (politique === candidats[i].partiPolitique) {
-                    console.log(`${candidats[i].cin} => ${candidats[i].nom} => ${candidats[i].prenom} => ${candidats[i].partiPolitique} => ${candidats[i].age} => ${[candidats[i].electeurs]}: ${candidats[i].electeurs.length}`);
+                    console.log(`${candidats[i].cin} => ${candidats[i].nom} => ${candidats[i].prenom} => ${candidats[i].partiPolitique} => ${candidats[i].age} => vote : ${candidats[i].electeurs.length}`);
                 }
             }
+        default:
+            return "you have a problem!";
     }
 }
 
@@ -188,5 +190,59 @@ function supprimi() {
     }
 }
 function REchecondid() {
+    let name = prompt("type a name of condidat : ")
+    for (let i = 0; i < candidats.length; i++) {
+        if (name === candidats[i].nom) {
+            console.log(`condidat : ${i} => cin : ${candidats[i].cin} => ${candidats[i].nom} => ${candidats[i].prenom} => ${candidats[i].partiPolitique} => ${candidats[i].age} => vote: ${candidats[i].electeurs.length}`);
+            break;
+        }
+    }
+}
+function StatEXtion() {
+    let fin = 3;
+    let somme = 0;
+    somme = candidats.length;
+    let sommevotes = 0;
+    for (let i = 0; i < candidats.length; i++) {
+        sommevotes = sommevotes + candidats[i].electeurs.length;
+    }
+    let i;
+    let j;
+    let u = 0;
+    console.log(`the somme of candida is : ${somme}`);
+    console.log(`the somme of votes is : ${sommevotes}`);
+    for (let h = 0; h < candidats.length; h++) {
+        for (i = 0; i < candidats.length; i++) {
+            let Bub;
+            for (j = i + 1; j < candidats.length; j++) {
+                if (candidats[i].electeurs < candidats[j].electeurs) {
+                    Bub = candidats[i].electeurs;
+                    candidats[i].electeurs = candidats[j].electeurs;
+                    candidats[j].electeurs = Bub;
+                }
+            }
+        }
+        while (h < fin) {
+            console.log(`
+                condida: ${h + 1} => ${candidats[h].cin} => ${candidats[h].nom} => ${candidats[h].prenom} => ${candidats[h].partiPolitique} => ${candidats[h].age} => votes: ${candidats[h].electeurs.length}`)
+            h++;
+        }
+    }
+    const partisPolitique = [];
+
+    for (let i = 0; i < candidats.length; i++) {
+
+        const parti = candidats[i].partiPolitique;
+        if (partisPolitique[parti] === undefined) {
+            partisPolitique[parti] = 1.
+        }
+        else {
+            partisPolitique[parti]++;
+        }
+    }
+    for (let parti in partisPolitique) {
+        console.log(`${parti} : ${partisPolitique[parti]} candidat(s)`);
+    }
 
 }
+
