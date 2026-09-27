@@ -3,18 +3,20 @@ const candidats = require('./PrjSasData');
 const saad = [...candidats];
 while (true) {
     console.log(`========================================
-            Listes Électorales                                           
-========================================`); console.log(`
-1. Ajouter un nouveau candidat
-2. Ajouter plusieurs candidats à la fois.
-3. Afficher la liste des candidats
-4. Voter pour un candidat
-5. Modifier les informations d'un candidat
-6. Supprimer un candidat
-7. Rechercher des candidats
-8. Statistiques de l'élection
-0. Quitter
-`); console.log("========================================");
+|           GESTION DES VOTES          |
+========================================`);
+    console.log(`
+  [1] ➔ Ajouter un nouveau candidat
+  [2] ➔ Ajouter plusieurs candidats à la fois.
+  [3] ➔ Afficher la liste des candidats
+  [4] ➔ Voter pour un candidat
+  [5] ➔ Modifier les informations d'un candidat
+  [6] ➔ Supprimer un candidat
+  [7] ➔ Rechercher des candidats
+  [8] ➔ Statistiques de l'élection
+  [0] ➔ Quitter
+`);
+    console.log("========================================");
 
     let n = prompt("type a number :")
     if (n == "0") {
@@ -50,11 +52,16 @@ while (true) {
 }
 
 function AJnveau() {
-    // let arr = [];
+    console.clear()
+    console.log(`========================================
+|         AJOUTER UN CANDIDAT          |
+========================================`);
     let cins = prompt("type a cin : ")
     for (let c = 0; c < candidats.length; c++) {
         if (cins === candidats[c].cin) {
+            console.log(`---------------------`);
             console.log("le cin deja ajouter!!")
+            console.log(`---------------------`);
             return;
         }
     }
@@ -82,6 +89,10 @@ function AJnveau() {
 }
 
 function AJplusr() {
+    console.clear();
+    console.log(`========================================
+|       AJOUTER PLUSIEURS CANDIDATS    |
+========================================`);
     let x = parseInt(prompt("type number of add in candida: "));
     for (let i = 1; i <= x; i++) {
         console.log(`=================================
@@ -92,17 +103,25 @@ function AJplusr() {
 }
 
 function AFlist() {
-    console.log(`=================================
-            AFlist
-=================================`);
-    let afficher = prompt("you have 3 choose '1' and '2' or '3' type your choose: ")
+    console.clear();
+    console.log(`========================================
+|          LISTE DES CANDIDATS         |
+========================================`);
+    console.log(`
+  [1] ➔ Afficher tous les candidats
+  [2] ➔ Trier par nombre de votes
+  [3] ➔ Filtrer par parti politique
+`);
+    let afficher = prompt("type your choose: ")
     switch (afficher) {
         case "1":
+            console.clear()
             for (let j = 0; j < candidats.length; j++) {
-                console.log(`condida: ${j + 1} => ${candidats[j].cin} => ${candidats[j].nom} => ${candidats[j].prenom} => ${candidats[j].partiPolitique} => ${candidats[j].age} => ${[candidats[j].electeurs]}: ${candidats[j].electeurs.length}`)
+                console.log(`condida: ${j + 1} => ${candidats[j].cin} => ${candidats[j].nom} => ${candidats[j].prenom} => ${candidats[j].partiPolitique} => ${candidats[j].age} => Vote: ${candidats[j].electeurs.length}`)
             }
             break;
         case "2":
+            console.clear()
             for (let h = 0; h < saad.length; h++) {
                 for (let i = 0; i < saad.length; i++) {
                     let compari;
@@ -118,102 +137,176 @@ function AFlist() {
             }
             break
         case "3":
+            console.clear()
             let politique = prompt("type your parti politique: ");
+            let found = false;
             for (let i = 0; i < candidats.length; i++) {
                 if (politique === candidats[i].partiPolitique) {
+                    found = true;
                     console.log(`${candidats[i].cin} => ${candidats[i].nom} => ${candidats[i].prenom} => ${candidats[i].partiPolitique} => ${candidats[i].age} => vote : ${candidats[i].electeurs.length}`);
                 }
             }
+            if (!found) {
+                console.log("Aucun candidat trouvé pour ce parti !");
+            }
+            console.log(`========================================================================`);
+            break;
         default:
             return "you have a problem!";
     }
 }
 
 function Votes() {
+    console.clear();
+    console.log(`=================================
+          ESPACE DE VOTE
+=================================`);
+    let vart;
+    let exist = false;
     let cins = prompt("type a cin : ")
-    for (let c = 0; c < candidats.length; c++) {
-        if (cins === candidats[c].cin) {
-            console.log("le cin deja ajouter!!")
-            return;
+    for (let i = 0; i < candidats.length; i++) {
+        if (candidats[i].electeurs.includes(cins)) {
+            exist = true;
+            break
         }
+    }
+    if (exist) {
+        console.log("the cin deja vue !");
+
     }
     let vote = prompt("do you want vote : ");
     switch (vote) {
         case "yes":
             let x = prompt("enter cin Related to the candidate: ");
             let i = 0;
+            let nfind = false;
             while (i < candidats.length) {
                 let c = [];
                 if (x === candidats[i].cin) {
                     c += cins;
+                    nfind = true;
                     candidats[i].electeurs.push(c);
+                    console.log(`---------`);
+                    console.log("succes!!!");
+                    console.log(`---------`);
+
+                    break
                 }
                 i++;
             }
-            console.log("succes!!!")
+            if (!nfind) {
+                console.log("this candidat not found! ")
+            }
             break;
         default:
             break;
     }
 }
 function MOinfo() {
+    console.clear();
+    console.log(`=================================
+       MODIFIER LES INFORMATIONS
+=================================`);
     let pr = prompt("type cin to modifier: ");
+    let not = false;
+    let choose;
     for (let i = 0; i < candidats.length; i++) {
         if (pr === candidats[i].cin) {
-            let choose = parseInt(prompt("type a choose 1 or 2: "));
+            not = true;
+            choose = parseInt(prompt("type a choose [1] Age ou [2] Parti politique: "));
             switch (choose) {
                 case 1:
+                    console.clear();
                     let a = parseInt(prompt("modifier your age: "));
                     candidats[i].age = a;
-                    console.log("you ")
+                    console.log("your age is change!")
                     break;
                 case 2:
+                    console.clear();
                     let b = prompt("change your partiPolitique: ")
                     candidats[i].partiPolitique = b;
+                    console.log(`------------------------------`);
+                    console.log("your partipolitique is change!")
+                    console.log(`------------------------------`);
                 default:
-                    menu();
+                    break;
             }
         }
     }
+    if (!not) {
+        console.log(`----------------------`);
+        console.log("the cin not correct ! ");
+        console.log(`----------------------`);
+    }
 }
 function supprimi() {
-    let vote = prompt("do you want remove : ");
+    console.clear();
+    console.log(`=================================
+       SUPPRIMER UN CANDIDAT
+=================================`);
+    let vote = prompt("do you want remove (yes/no) : ");
     switch (vote) {
         case "yes":
+            console.log(`-------------------------------------`);
             cins = prompt("enter cin for remove the candidate: ");
-            let i = 0;
-            while (i < saad.length) {
-                if (cins === saad[i].cin) {
-                    candidats.splice(i, 1);
-                    break;
+            console.log(`-------------------------------------`);
+            let exist = false;
+            let value;
+            for (let J = 0; J < candidats.length; J++) {
+                if (cins === candidats[J].cin) {
+                    value = candidats[J];
+                    exist = true;
+                    console.log("the recherche is succes!!");
+                    if (cins === candidats[J].cin) {
+                        candidats.splice(J, 1);
+                        console.log(`-----------------`);
+                        console.log("remove succes!!!");
+                        console.log(`-----------------`);
+                        break;
+                    }
                 }
-                i++;
             }
-            console.log("remove succes!!!");
+            if (!exist) {
+                console.log(`--------------------`);
+                console.log("this cin not found!")
+                console.log(`---------------------`);
+            }
+            break;
         default:
+            console.log(`---------`);
             console.log("unsucces");
+            console.log(`---------`);
+
             break;
     }
 }
 function REchecondid() {
+    console.clear();
+    console.log(`=================================
+        RECHERCHE DE CANDIDAT
+=================================`);
     let name = prompt("type a name of condidat : ")
     let cond;
     let exist = false;
-    for (let i = 0; i < saad.length; i++) {
-        if (name === saad[i].nom) {
-            cond = saad[i];
+    for (let i = 0; i < candidats.length; i++) {
+        if (name === candidats[i].nom) {
+            cond = candidats[i];
             exist = true
             console.log("the recherche is succes!!");
-            break;
+            console.log(`--------------------------------------------------`);
+            console.log(`${cond.cin} => ${cond.nom} => ${cond.prenom} => ${cond.partiPolitique} => ${cond.age} => vote : ${cond.electeurs.length}`);
+            console.log(`--------------------------------------------------`);
         }
     }
-    // console.log(cond)
-    console.log(`${cond.cin} => ${cond.nom} => ${cond.prenom} => ${cond.partiPolitique} => ${cond.age} => vote : ${cond.electeurs.length}`);
     if (!exist) {
         console.log("you have a problem!")
     }
 }
 function StatEXtion() {
+    console.clear()
+    console.log(`=================================
+        STATISTIQUES
+=================================`);
     let fin = 3;
     let somme = 0;
     somme = candidats.length;
@@ -224,8 +317,11 @@ function StatEXtion() {
     let i;
     let j;
     let u = 0;
+    console.log(`------------- La Somme --------------`);
     console.log(`the somme of candida is : ${somme}`);
+    console.log(`------------- La Sommevotes --------------`);
     console.log(`the somme of votes is : ${sommevotes}`);
+    console.log(`-------------------------------------`);
     for (let h = 0; h < candidats.length; h++) {
         for (i = 0; i < candidats.length; i++) {
             let Bub;
@@ -238,26 +334,30 @@ function StatEXtion() {
             }
         }
         while (h < fin) {
+            console.log(`------------------------------------------------------------------------`);
             console.log(`
-                condida: ${h + 1} => ${candidats[h].cin} => ${candidats[h].nom} => ${candidats[h].prenom} => ${candidats[h].partiPolitique} => ${candidats[h].age} => votes: ${candidats[h].electeurs.length}`)
+condida: ${h + 1} => ${candidats[h].cin} => ${candidats[h].nom} => ${candidats[h].prenom} => ${candidats[h].partiPolitique} => ${candidats[h].age} => votes: ${candidats[h].electeurs.length}`)
             h++;
         }
     }
+    console.log(`------------------------------------------------------------------------`);
+    console.log(`\n[RÉPARTITION PAR PARTI POLITIQUE]`);
+    console.log(`------------------------------------------------------------------------`);
     const partisPolitique = [];
 
     for (let i = 0; i < candidats.length; i++) {
 
-        const parti = candidats[i].partiPolitique;
+        let parti = candidats[i].partiPolitique;
         if (partisPolitique[parti] === undefined) {
-            partisPolitique[parti] = 1.
+            partisPolitique[parti] = 0;
         }
-        else {
-            partisPolitique[parti]++;
-        }
+        partisPolitique[parti]++;
     }
     for (let parti in partisPolitique) {
         console.log(`${parti} : ${partisPolitique[parti]} candidat(s)`);
     }
-
+    console.log(`========================================================================`);
 }
+
+
 
