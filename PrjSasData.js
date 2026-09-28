@@ -11,6 +11,6 @@ const candidats = [
     { cin: "AP345678", nom: "ahLou", prenom: "Meryem", partiPolitique: "ahrar", age: 42, electeurs: [PM457, JB534163] },
     { cin: "AZ345678", nom: "Bennani", prenom: "Rachid", partiPolitique: "Independant", age: 39, electeurs: [] },
 ];
-let saad = [...candidats];
+
 module.exports = candidats;
-module.exports = saad;
+
