@@ -1,5 +1,5 @@
 var prompt = require('prompt-sync')();
-const candidats = require('./elements');
+const candidats = require('./PrjSasData');
 while (true) {
     console.log(`========================================
 |           GESTION DES VOTES          |
@@ -352,5 +352,3 @@ condida: ${h + 1} => ${candidats[h].cin} => ${candidats[h].nom} => ${candidats[h
     }
     console.log(`========================================================================`);
 }
-
-
